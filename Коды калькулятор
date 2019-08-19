@@ -1,0 +1,749 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace calc
+{
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        double operand1 = 0;
+        double operand2 = 0;
+        string operation = "";  
+        string str="";//  dlya binarnogo formata
+        bool comma = false;    //priznak , - no
+        double dec = 1; // dlya veshestv chisla
+        double decNum=0;   // dly decyatichnoy cictemi schsleniya
+        public double memory;
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        void number(ref double op1,ref double op2,ref string oper, int numeral,ref bool fl,ref double dec1)
+        {
+            if (fl)
+            {
+                {
+                    dec1 *= 10;
+                    if (oper == "")
+                    {
+                        op1 = op1 + (double)numeral / dec1;
+                        result.Text = op1.ToString();
+                    }
+                    else
+                    {
+                        op2 = op2 + (double)numeral / dec1;
+                        result.Text = op2.ToString();
+
+                    }
+                }
+            }
+            else
+            {
+                if (oper == "")
+                {
+                    operand1 = (op1 * 10) + (double)numeral / dec1;
+                    result.Text = op1.ToString();
+                }
+                else
+                {
+                    op2 = (op2 * 10) + numeral / dec1;
+                    result.Text = op2.ToString();
+                }
+            }
+        }
+        //----------------------------------------------------------------------------------------------
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 1, ref comma, ref dec);
+        }
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {  
+              number(ref operand1, ref operand2, ref operation, 2, ref comma, ref dec);
+           
+        }
+
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 3, ref comma, ref dec);
+        }
+
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 4, ref comma, ref dec);
+        }
+
+        private void Button5_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 5, ref comma, ref dec);
+        }
+
+        private void Button6_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 6, ref comma, ref dec);
+        }
+
+        private void Button7_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 7, ref comma, ref dec);
+        }
+
+        private void Button8_Click(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1,ref operand2,ref operation, 8,ref comma,ref dec);
+        }
+
+        private void Button0_Click_1(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 0, ref comma, ref dec);
+        }
+
+        private void Button9_Click_1(object sender, RoutedEventArgs e)
+        {
+            number(ref operand1, ref operand2, ref operation, 9, ref comma, ref dec);
+        }
+
+        private void ButtonDiv_Click(object sender, RoutedEventArgs e)
+        { if (operation == "")
+            {
+                comma = false;
+                operation = "/";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "/";
+            }
+        }
+
+        private void ButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                operation = "+";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "+";
+            }
+        }
+
+        private void ButtonMult_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                operation = "*";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "*";
+            }
+        }
+
+        private void ButtonMinus_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                operation = "-";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "-";
+            }
+
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            operand1 = 0;
+            operand2 = 0;
+            operation = "";
+            result.Text = "0";
+            dec = 1;
+            decNum = -11111;  // obnuleniya znacheniya (mogno postavit luboe znachenie)
+            comma = false;
+        }
+
+        private void ButtonBackSpace_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (operation == "")
+        //    {
+        //        if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
+        //        {
+        //            operand1 = operand1 / 10;
+        //            operand1 = (int)operand1;
+        //            result.Text = operand1.ToString();
+        //        }
+        //        else
+        //        {
+        //            result.Text = "Error";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (Math.Abs(operand2 - (int)operand2) < 0.0000001)
+        //        {
+        //            operand2 = (operand2 / 10);
+        //            operand2 = (int)operand2;
+        //            result.Text = operand2.ToString();
+        //        }
+        //        else
+        //        { result.Text = "Error";
+        //        }
+        //    }
+        //}
+        {
+            if (result.Text.Length != 1)
+            {
+                result.Text = result.Text.Remove(result.Text.Length - 1);
+            }
+            else
+            {
+                result.Text = "0";
+            }
+        }
+            private void ButtonPlMn_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                operand1 *= -1;
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 *= -1;
+                result.Text = operand2.ToString();
+            }
+        }
+
+        private void ButtonEqually_Click(object sender, RoutedEventArgs e)
+        {
+            switch (operation)
+            {
+                case "+":
+                    {
+                        result.Text = (operand1 + operand2).ToString();
+                        break;
+                    }
+                case "-":
+                    {
+                        result.Text = (operand1 - operand2).ToString();
+                        break;
+                    }
+                case "*":
+                    {
+                        result.Text = (operand1 * operand2).ToString();
+                        break;
+                    }
+                case "/":
+                    {
+                        result.Text = (operand1 / operand2).ToString();
+                        break;
+
+                    }
+                case "%":
+                    {
+                        result.Text = (operand1 % operand2).ToString();
+                        break;
+
+                    }
+                case "√":
+                    {
+                        int indexOfRoot = result.Text.IndexOf('√');
+                        int exponent = (int)operand1;
+
+                        string piece = result.Text.Substring(indexOfRoot + 1);
+
+                        if (double.TryParse(piece, out operand2))
+                        {
+                            double SqrtN = Math.Pow(operand2, 1.0 / exponent);
+                            result.Text = SqrtN.ToString();
+                        }
+                        else
+                        {
+                            result.Text = "Error";
+                        }
+                        break;
+                    }
+                case "^":
+                    {
+                        result.Text = Math.Pow(operand1,operand2).ToString();
+                        break;
+
+                    }
+                /*   case "3":
+                       {
+                           result.Text = Math.Pow(operand1, 3).ToString();
+                           break;
+
+                       }
+                   case "2":
+                       {
+                           result.Text = Math.Pow(operand1, 2).ToString();
+                           break;
+
+                       }*/
+              
+            }
+            operand1 = 0;
+            operand2 = 0;
+            comma = false;
+            dec = 1;
+        }
+
+        private void ButtonPoint_Click(object sender, RoutedEventArgs e)
+        {     if (operation == "" && !comma)
+            {
+                result.Text = operand1.ToString() + ',';
+                comma = true;
+            }
+            else
+            {  if (!comma)
+                {
+                    result.Text = operand2.ToString() + ',';
+                    comma = true;
+                }
+                else
+                { result.Text= "Error"; 
+                }
+            }
+        }
+        private void ButtonBin_Click(object sender, RoutedEventArgs e)
+        {
+            decNum = operand1;
+            if (operation == "")
+            {
+              comma = false;
+                dec = 1;
+                if (Math.Abs(operand1-(int)operand1) < 0.0000001)
+                {
+                    binary((int)operand1);
+                }
+                else
+                    result.Text = "Error";
+            }
+        }
+
+        void binary(int n)
+        {
+            result.Clear();
+            int tmp = n % 2;
+            if (n >= 2)
+                binary(n/2);
+            str+= tmp.ToString();
+            result.Text += tmp.ToString();
+
+        }
+        void oct(int n)
+        {
+            result.Clear();
+            int tmp = n % 8;
+            if (n >= 8)
+                oct(n / 8);
+            str += tmp.ToString();
+            result.Text += tmp.ToString();
+
+        }
+        bool getHex(int num)
+        { if (num > 9 && num < 16)
+                return true;
+            else
+                return false;
+        }
+        char chr1(int num)  // vozvrashaet ot A-F
+        { char ch='g';
+            if (num == 10)
+                ch = 'A';
+            if (num == 11)
+                ch = 'B';
+            if (num == 12)
+                ch = 'С';
+            if (num == 13)
+                ch = 'D';
+            if (num == 14)
+                ch = 'E';
+            if (num == 15)
+                ch = 'F';
+            return ch;
+        }
+        void hex(int n)
+        {
+            result.Clear();
+            int tmp = n % 16;
+            if (n >= 16)
+                hex(n / 16);
+             if (getHex(tmp))
+                   str=chr1(tmp).ToString();
+            else
+                str = tmp.ToString();
+            result.Text += str;
+        }
+
+        private void ButtonOct_Click(object sender, RoutedEventArgs e)
+        {
+            decNum = operand1;
+            if (operation == "")
+            {
+                comma = false;
+                dec = 1;
+                if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
+                {
+                    oct((int)operand1);
+                }
+                else
+                    result.Text = "Error";
+            }
+        }
+
+        private void ButtonDec_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                dec = 1;
+                if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
+                {
+                    result.Text = decNum.ToString();
+                }
+                else
+                    result.Text = "Error";
+            }
+        }
+
+        private void ButtonHec_Click(object sender, RoutedEventArgs e)
+        {
+            decNum = operand1;
+            result.Text = "";
+            if (operation == "")
+            {
+                comma = false;
+                dec = 1;
+                if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
+                {
+                    hex((int)operand1);
+                }
+                else
+                    result.Text = "Error";
+            }
+       }
+
+        private void ButtonMplus_Click(object sender, RoutedEventArgs e)
+        {
+            if (result.Text == "")
+                memory += 0;
+            else
+            {
+                memory += double.Parse(result.Text);
+            }
+            buttonMR.IsEnabled = true;
+            buttonMC.IsEnabled = true;
+        }
+
+        private void ButtonMminus_Click(object sender, RoutedEventArgs e)
+        {
+            if (result.Text == "")
+                memory -= 0;
+            else
+            {
+                memory -= double.Parse(result.Text);
+            }
+            buttonMR.IsEnabled = true;
+            buttonMC.IsEnabled = true;
+        }
+
+        private void ButtonMC_Click(object sender, RoutedEventArgs e)
+        {
+            memory = 0;
+            buttonMC.IsEnabled = false;
+            buttonMR.IsEnabled = false;
+        }
+
+        private void ButtonMR_Click(object sender, RoutedEventArgs e)
+        {if (operation == "")
+                operand1 = memory;
+            else
+                operand2 = memory;
+            result.Text = Convert.ToString(memory);
+        }
+
+        private void ButtonPi_Click(object sender, RoutedEventArgs e)
+        {   
+            if (operation == "")
+            {
+                operand1 = Math.PI;
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.PI;
+                result.Text = operand2.ToString();
+            }
+            
+        }
+
+        private void ButtonCos_Click(object sender, RoutedEventArgs e)
+        {
+            result.Text = ""; 
+            if (operation == "" )
+            {
+                operand1 = Math.Cos(operand1);
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.Cos(operand2);
+                result.Text = operand2.ToString();
+            }
+        }
+
+        private void ButtonMod_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                operation = "%";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "%";
+            }
+
+
+        }
+        
+        
+        private void ButtonFact_Click(object sender, RoutedEventArgs e)
+        {
+            
+            double fact = 1;
+            result.Text = "";
+            if (operand1 >= 0)
+            {
+                for (int i = 1; i <= operand1; i++)
+                {
+                    fact *= i;
+                }
+
+                if (operation == "")
+                {
+                    operand1 = fact;
+                    result.Text = operand1.ToString();
+                }
+                else
+                {
+                    operand2 = fact;
+                    result.Text = operand2.ToString();
+                }
+            }
+            else result.Text = "Error";
+        }
+
+
+        private void Buttonlog_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                operand1 = Math.Log(operand1);
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.Log(operand2);
+                result.Text = operand2.ToString();
+            }
+
+
+        }
+
+        private void ButtonExp_Click(object sender, RoutedEventArgs e)
+        {
+            result.Text = "";
+            if (operation == "")
+            {
+                operand1 = Math.Tan(operand1);
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.Tan(operand2);
+                result.Text = operand2.ToString();
+            }
+
+        }
+
+        private void ButtonDivX_Click(object sender, RoutedEventArgs e)
+        {
+            result.Text = "";
+            if (operand1 > 0)
+            {
+              
+                if (operation == "")
+                {
+                    operand1 = 1/operand1;
+                    result.Text = operand1.ToString();
+                }
+                else
+                {
+                    operand2 = 1/operand2;
+                    result.Text = operand2.ToString();
+                }
+            }
+            else result.Text = "Error";
+        }
+
+        private void ButtonXY_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                comma = false;
+                operation = "^";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "^";
+            }
+        }
+
+        private void ButtonX3_Click(object sender, RoutedEventArgs e)
+        {
+           /* if (operation == "")
+            {
+                comma = false;
+                operation = "3";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "3";
+            }*/
+        }
+
+        private void ButtonX2_Click(object sender, RoutedEventArgs e)
+        {
+          /*  if (operation == "")
+            {
+                comma = false;
+                operation = "2";
+                dec = 1;
+            }
+            else
+            {
+                operand1 = Convert.ToDouble(result.Text);
+                operation = "2";
+            }*/
+        }
+
+        private void ButtonSin_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                operand1 = Math.Sin(operand1);
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.Sin(operand2);
+                result.Text = operand2.ToString();
+            }
+
+        }
+
+        private void ButtonMLn_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                operand1 = Math.Log10(operand1);
+                result.Text = operand1.ToString();
+            }
+            else
+            {
+                operand2 = Math.Log10(operand2);
+                result.Text = operand2.ToString();
+            }
+
+        }
+
+        private void ButtonSqrt_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(result.Text, out operand1))
+            {
+                if (operation == "")
+                {
+                    operand1 = Math.Sqrt(operand1);
+                    result.Text = operand1.ToString();
+                }
+                else
+                {
+                    operand2 = Math.Sqrt(operand2);
+                    result.Text = operand2.ToString();
+                }
+            }
+            else { result.Text = "Error";
+            }  
+        }
+
+        private void ButtonsqrtN_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(result.Text, out operand1))
+            {
+                operation = "√";
+                result.Text += "√";
+            }
+            else
+            {
+                result.Text = "Error";
+            }
+        }
+
+        private void Buttonsgrt3_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(result.Text, out operand1))
+            {
+                if (operation == "")
+                {
+                    operand1 = Math.Pow(operand1, 1.0 / 3.0);
+                    result.Text = operand1.ToString();
+                }
+                else
+                {
+                    operand2 = Math.Pow(operand1, 1.0 / 3.0);
+                    result.Text = operand2.ToString();
+                }
+            }
+            else
+            {
+                result.Text = "Error";
+            }
+        }
+    }
+    }
+
