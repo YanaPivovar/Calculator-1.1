@@ -22,18 +22,18 @@ namespace calc
     {
         double operand1 = 0;
         double operand2 = 0;
-        string operation = "";  
-        string str="";//  dlya binarnogo formata
+        string operation = "";
+        string str = "";//  dlya binarnogo formata
         bool comma = false;    //priznak , - no
         double dec = 1; // dlya veshestv chisla
-        double decNum=0;   // dly decyatichnoy cictemi schsleniya
+        double decNum = 0;   // dly decyatichnoy cictemi schsleniya
         public double memory;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        void number(ref double op1,ref double op2,ref string oper, int numeral,ref bool fl,ref double dec1)
+        void number(ref double op1, ref double op2, ref string oper, int numeral, ref bool fl, ref double dec1)
         {
             if (fl)
             {
@@ -72,9 +72,9 @@ namespace calc
             number(ref operand1, ref operand2, ref operation, 1, ref comma, ref dec);
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
-        {  
-              number(ref operand1, ref operand2, ref operation, 2, ref comma, ref dec);
-           
+        {
+            number(ref operand1, ref operand2, ref operation, 2, ref comma, ref dec);
+
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
@@ -104,7 +104,7 @@ namespace calc
 
         private void Button8_Click(object sender, RoutedEventArgs e)
         {
-            number(ref operand1,ref operand2,ref operation, 8,ref comma,ref dec);
+            number(ref operand1, ref operand2, ref operation, 8, ref comma, ref dec);
         }
 
         private void Button0_Click_1(object sender, RoutedEventArgs e)
@@ -118,7 +118,8 @@ namespace calc
         }
 
         private void ButtonDiv_Click(object sender, RoutedEventArgs e)
-        { if (operation == "")
+        {
+            if (operation == "")
             {
                 comma = false;
                 operation = "/";
@@ -174,7 +175,6 @@ namespace calc
                 operand1 = Convert.ToDouble(result.Text);
                 operation = "-";
             }
-
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
@@ -189,33 +189,6 @@ namespace calc
         }
 
         private void ButtonBackSpace_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (operation == "")
-        //    {
-        //        if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
-        //        {
-        //            operand1 = operand1 / 10;
-        //            operand1 = (int)operand1;
-        //            result.Text = operand1.ToString();
-        //        }
-        //        else
-        //        {
-        //            result.Text = "Error";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (Math.Abs(operand2 - (int)operand2) < 0.0000001)
-        //        {
-        //            operand2 = (operand2 / 10);
-        //            operand2 = (int)operand2;
-        //            result.Text = operand2.ToString();
-        //        }
-        //        else
-        //        { result.Text = "Error";
-        //        }
-        //    }
-        //}
         {
             if (result.Text.Length != 1)
             {
@@ -226,7 +199,7 @@ namespace calc
                 result.Text = "0";
             }
         }
-            private void ButtonPlMn_Click(object sender, RoutedEventArgs e)
+        private void ButtonPlMn_Click(object sender, RoutedEventArgs e)
         {
             if (operation == "")
             {
@@ -291,23 +264,23 @@ namespace calc
                     }
                 case "^":
                     {
-                        result.Text = Math.Pow(operand1,operand2).ToString();
+                        result.Text = Math.Pow(operand1, operand2).ToString();
                         break;
 
                     }
-                /*   case "3":
-                       {
-                           result.Text = Math.Pow(operand1, 3).ToString();
-                           break;
+                    /*   case "3":
+                           {
+                               result.Text = Math.Pow(operand1, 3).ToString();
+                               break;
 
-                       }
-                   case "2":
-                       {
-                           result.Text = Math.Pow(operand1, 2).ToString();
-                           break;
+                           }
+                       case "2":
+                           {
+                               result.Text = Math.Pow(operand1, 2).ToString();
+                               break;
 
-                       }*/
-              
+                           }*/
+
             }
             operand1 = 0;
             operand2 = 0;
@@ -316,30 +289,34 @@ namespace calc
         }
 
         private void ButtonPoint_Click(object sender, RoutedEventArgs e)
-        {     if (operation == "" && !comma)
+        {
+            if (operation == "" && !comma)
             {
                 result.Text = operand1.ToString() + ',';
                 comma = true;
             }
             else
-            {  if (!comma)
+            {
+                if (!comma)
                 {
                     result.Text = operand2.ToString() + ',';
                     comma = true;
                 }
                 else
-                { result.Text= "Error"; 
+                {
+                    result.Text = "Error";
                 }
             }
         }
+
         private void ButtonBin_Click(object sender, RoutedEventArgs e)
         {
             decNum = operand1;
             if (operation == "")
             {
-              comma = false;
+                comma = false;
                 dec = 1;
-                if (Math.Abs(operand1-(int)operand1) < 0.0000001)
+                if (Math.Abs(operand1 - (int)operand1) < 0.0000001)
                 {
                     binary((int)operand1);
                 }
@@ -353,10 +330,9 @@ namespace calc
             result.Clear();
             int tmp = n % 2;
             if (n >= 2)
-                binary(n/2);
-            str+= tmp.ToString();
+                binary(n / 2);
+            str += tmp.ToString();
             result.Text += tmp.ToString();
-
         }
         void oct(int n)
         {
@@ -366,16 +342,17 @@ namespace calc
                 oct(n / 8);
             str += tmp.ToString();
             result.Text += tmp.ToString();
-
         }
         bool getHex(int num)
-        { if (num > 9 && num < 16)
+        {
+            if (num > 9 && num < 16)
                 return true;
             else
                 return false;
         }
         char chr1(int num)  // vozvrashaet ot A-F
-        { char ch='g';
+        {
+            char ch = 'g';
             if (num == 10)
                 ch = 'A';
             if (num == 11)
@@ -396,8 +373,8 @@ namespace calc
             int tmp = n % 16;
             if (n >= 16)
                 hex(n / 16);
-             if (getHex(tmp))
-                   str=chr1(tmp).ToString();
+            if (getHex(tmp))
+                str = chr1(tmp).ToString();
             else
                 str = tmp.ToString();
             result.Text += str;
@@ -449,7 +426,7 @@ namespace calc
                 else
                     result.Text = "Error";
             }
-       }
+        }
 
         private void ButtonMplus_Click(object sender, RoutedEventArgs e)
         {
@@ -483,7 +460,8 @@ namespace calc
         }
 
         private void ButtonMR_Click(object sender, RoutedEventArgs e)
-        {if (operation == "")
+        {
+            if (operation == "")
                 operand1 = memory;
             else
                 operand2 = memory;
@@ -491,7 +469,7 @@ namespace calc
         }
 
         private void ButtonPi_Click(object sender, RoutedEventArgs e)
-        {   
+        {
             if (operation == "")
             {
                 operand1 = Math.PI;
@@ -502,13 +480,12 @@ namespace calc
                 operand2 = Math.PI;
                 result.Text = operand2.ToString();
             }
-            
         }
 
         private void ButtonCos_Click(object sender, RoutedEventArgs e)
         {
-            result.Text = ""; 
-            if (operation == "" )
+            result.Text = "";
+            if (operation == "")
             {
                 operand1 = Math.Cos(operand1);
                 result.Text = operand1.ToString();
@@ -533,14 +510,12 @@ namespace calc
                 operand1 = Convert.ToDouble(result.Text);
                 operation = "%";
             }
-
-
         }
-        
-        
+
+
         private void ButtonFact_Click(object sender, RoutedEventArgs e)
         {
-            
+
             double fact = 1;
             result.Text = "";
             if (operand1 >= 0)
@@ -577,8 +552,6 @@ namespace calc
                 operand2 = Math.Log(operand2);
                 result.Text = operand2.ToString();
             }
-
-
         }
 
         private void ButtonExp_Click(object sender, RoutedEventArgs e)
@@ -594,7 +567,6 @@ namespace calc
                 operand2 = Math.Tan(operand2);
                 result.Text = operand2.ToString();
             }
-
         }
 
         private void ButtonDivX_Click(object sender, RoutedEventArgs e)
@@ -602,15 +574,15 @@ namespace calc
             result.Text = "";
             if (operand1 > 0)
             {
-              
+
                 if (operation == "")
                 {
-                    operand1 = 1/operand1;
+                    operand1 = 1 / operand1;
                     result.Text = operand1.ToString();
                 }
                 else
                 {
-                    operand2 = 1/operand2;
+                    operand2 = 1 / operand2;
                     result.Text = operand2.ToString();
                 }
             }
@@ -634,32 +606,32 @@ namespace calc
 
         private void ButtonX3_Click(object sender, RoutedEventArgs e)
         {
-           /* if (operation == "")
-            {
-                comma = false;
-                operation = "3";
-                dec = 1;
-            }
-            else
-            {
-                operand1 = Convert.ToDouble(result.Text);
-                operation = "3";
-            }*/
+            /* if (operation == "")
+             {
+                 comma = false;
+                 operation = "3";
+                 dec = 1;
+             }
+             else
+             {
+                 operand1 = Convert.ToDouble(result.Text);
+                 operation = "3";
+             }*/
         }
 
         private void ButtonX2_Click(object sender, RoutedEventArgs e)
         {
-          /*  if (operation == "")
-            {
-                comma = false;
-                operation = "2";
-                dec = 1;
-            }
-            else
-            {
-                operand1 = Convert.ToDouble(result.Text);
-                operation = "2";
-            }*/
+            /*  if (operation == "")
+              {
+                  comma = false;
+                  operation = "2";
+                  dec = 1;
+              }
+              else
+              {
+                  operand1 = Convert.ToDouble(result.Text);
+                  operation = "2";
+              }*/
         }
 
         private void ButtonSin_Click(object sender, RoutedEventArgs e)
@@ -674,7 +646,6 @@ namespace calc
                 operand2 = Math.Sin(operand2);
                 result.Text = operand2.ToString();
             }
-
         }
 
         private void ButtonMLn_Click(object sender, RoutedEventArgs e)
@@ -689,7 +660,6 @@ namespace calc
                 operand2 = Math.Log10(operand2);
                 result.Text = operand2.ToString();
             }
-
         }
 
         private void ButtonSqrt_Click(object sender, RoutedEventArgs e)
@@ -707,8 +677,10 @@ namespace calc
                     result.Text = operand2.ToString();
                 }
             }
-            else { result.Text = "Error";
-            }  
+            else
+            {
+                result.Text = "Error";
+            }
         }
 
         private void ButtonsqrtN_Click(object sender, RoutedEventArgs e)
@@ -745,5 +717,4 @@ namespace calc
             }
         }
     }
-    }
-
+}
